@@ -1,0 +1,11 @@
+{% block content %}
+<h1>Přidat recenzi pro: {{ place.name }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Uložit recenzi</button>
+</form>
+
+<a href="{% url 'place_detail' place.id %}">Zpět na detail místa</a>
+{% endblock %}

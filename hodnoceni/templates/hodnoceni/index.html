@@ -1,0 +1,53 @@
+{% extends "hodnoceni/layout.html" %}
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <a class="navbar-brand" href="#">Recenze míst</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="#">Home</a>
+            {% if user.is_authenticated %}
+                <span class="nav-item nav-link text-muted" style="cursor: default;">
+                    Přihlášen jako {{ user.username }}
+                </span>
+                <a class="nav-item nav-link" href="/accounts/logout">Odhlásit</a>
+            {% else %}
+                <a class="nav-item nav-link" href="/accounts/login">Přihlášení</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    {% for place in places %}
+        <div class="place-card">
+            <h2 class="text-uppercase fw-bold" style="font-family: 'PT Sans', sans-serif;">{{ place.name }}</h2>
+            <ul>
+                {% for review in place.review_set.all %}
+                    <li class="review-card">
+                        <strong>{{ review.user.username }}</strong> napsal recenzi: 
+                        <p>"{{ review.popis }}"</p> 
+                        s hodnocením: 
+                        <span class="rating">{{ review.rating }}</span>
+                    </li>
+                {% empty %}
+                    <li>Žádné recenze pro toto místo.</li>
+                {% endfor %}
+            </ul>
+            <div class="actions">
+                <a href="{% url 'place_detail' place.id %}" class="btn">Zobrazit detail</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'add_review' place.id %}" class="btn btn-primary">Přidat recenzi</a>
+                {% else %}
+                    <a href="/accounts/login" class="btn btn-secondary">Přihlaste se pro přidání recenze</a>
+                {% endif %}
+            </div>
+        </div>
+    {% empty %}
+        <p>Žádná místa k dispozici.</p>
+    {% endfor %}
+</div>
+{% endblock %}

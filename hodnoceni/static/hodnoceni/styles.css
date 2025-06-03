@@ -1,0 +1,97 @@
+/* Obecné nastavení pro celou stránku */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.hornicast {
+    padding: 0px 30px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hlavní nadpis */
+h1.text-center {
+    color: #333;
+    font-size: 2.5rem;
+}
+
+/* Styling pro kartu s místem */
+.place-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efekt při najetí myší na kartu místa */
+.place-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Nadpis pro název místa */
+.place-card h2 {
+    font-size: 1.75rem;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+/* Stylování pro seznam recenzí */
+.review-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+/* Efekt při najetí myší na recenzi */
+.review-card:hover {
+    background-color: #eaeaea;
+}
+
+/* Text recenze */
+.review-text {
+    font-style: italic;
+    color: #555;
+}
+
+/* Styling pro hodnocení (hvězdičky) */
+.rating {
+    color: #f39c12; /* Zlatá barva pro hvězdičky */
+    font-size: 1.25rem;
+}
+
+/* Styling pro jméno uživatele */
+.review-card strong {
+    color: #333;
+    font-weight: bold;
+}
+
+/* Tlačítko pro přidání recenze */
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Reakce při neexistujících recenzích */
+.text-muted {
+    color: #888;
+}

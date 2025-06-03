@@ -1,0 +1,100 @@
+{% extends "hodnoceni/layout.html" %}
+
+{% block body %}
+<div class="container py-5">
+    <!-- Hlavička místa s pozadím -->
+    <div class="rounded-3 p-5 mb-4 text-center">
+        <h1 class="display-4 fw-bold text-primary">{{ place.name }}</h1>
+        
+        <div class="place-details mt-3">
+            <p class="lead">{{ place.popis }}</p>
+            <!-- Další detaily místa -->
+        </div>
+    </div>
+
+    <!-- Sekce recenzí -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h2 class="h3 mb-0">Recenze a hodnocení</h2>
+        </div>
+        
+        <div class="card-body">
+            {% if reviews %}
+                <div class="row">
+                    {% for review in reviews %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="badge bg-primary rounded-pill px-3 py-2">
+                                            Hodnocení: {{ review.rating }}/5
+                                        </div>
+                                        <small class="text-muted">{{ review.datum_vytvoreni|date:"d.m.Y" }}</small>
+                                    </div>
+                                    <p class="card-text mb-3">{{ review.popis }}</p>
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar bg-secondary rounded-circle text-white d-flex align-items-center justify-content-center me-2" style="width: 32px; height: 32px;">
+                                            {{ review.user.username|first|upper }}
+                                        </div>
+                                        <span class="fw-bold">{{ review.user.username }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle me-2"></i> Zatím nejsou žádné recenze. Buďte první, kdo přidá hodnocení!
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Tlačítko pro přidání recenze -->
+    <div class="text-center mt-4">
+        <a href="{% url 'add_review' place_id=place.id %}" class="btn btn-primary btn-lg px-4 shadow-sm">
+            <i class="bi bi-plus-circle me-2"></i> Přidat recenzi
+        </a>
+    </div>
+</div>
+
+
+{% block styles %}
+<style>
+    body {
+        font-family: "PT Sans", sans-serif;
+    }
+    .card {
+        transition: transform 0.2s;
+        border-radius: 0.5rem;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .badge {
+        font-weight: 500;
+    }
+    
+    .avatar {
+        font-size: 14px;
+    }
+
+    .rounded-3.p-5.mb-4 {
+        text-align: center;
+
+    }
+    
+    .rounded-3.p-5.mb-4 h1 {
+        font-size: 3rem;
+        color: #007bff;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+    
+</style>
+{% endblock %}
+
+{% endblock %}
